@@ -1,2 +1,3 @@
 # hook-for-react-use-fetch
-A react hook to fetch and handle fetched data
+
+An easy to use react hook to handle data fetching, fetching status, and fetching events

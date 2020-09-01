@@ -55,19 +55,22 @@ class FetchHandler {
         method: request.method,
       };
       
-      !!request.body && (apiRequest.body = request.body);
-      !!request.headers && (apiRequest.headers = new Headers({"Content-Type": 'application/json', ...request.headers,}));
+      (!!request.body) && (apiRequest.body = JSON.stringify(request.body));
+      (!!request.headers) && (apiRequest.headers = new Headers({"Content-Type": 'application/json', ...request.headers,}));
+      (!request.headers) && (apiRequest.headers = new Headers({"Content-Type": 'application/json',}));
       apiRequest.credentials = request.credentials || undefined;
       
       let fetched: any;
       
       if(apiRequest.method === 'POSTFILE') {
-        apiRequest.body = {
-          ...apiRequest.body,
+        apiRequest.body = JSON.stringify({
+          ...request.body,
           files: request.files || [],
-        };
+        });
       }
-      
+  
+      console.log("dev useFetch request ", apiRequest)
+  
       fetched = await fetch(url, apiRequest);
       
       const fetchedJson = await fetched.json()
@@ -92,27 +95,27 @@ class FetchHandler {
       case "SET_STATUS":
         return ({
           ...state,
-          _useFetchStatus: action.value,
+          _status: action.value,
         });
       
       case "START_FETCHING":
         return ({
           ...state,
-          _useFetchStatus: "fetching",
+          _status: "fetching",
         });
       
       case "FETCHING_ERROR":
         return ({
           ...state,
           ...action.value,
-          _useFetchStatus: "error",
+          _status: "error",
         });
       
       case "SET_SUCCESS":
         return ({
           ...state,
           ...action.value,
-          _useFetchStatus: "fetched",
+          _status: "fetched",
         });
       
       default:

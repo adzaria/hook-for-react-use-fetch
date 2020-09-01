@@ -56,6 +56,8 @@ Use another useEffect to do something once data is fetched
 ```
 ```
 
+status is stored in fetched._status, do not overwrite this value ...
+
 # Doc 🔖
 
     

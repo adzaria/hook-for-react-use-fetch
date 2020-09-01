@@ -1,7 +1,7 @@
 {
   "name": "hook-for-react-use-fetch",
-  "version": "0.1.0",
-  "description": "An easy to use react hook to handle data fetching, fetching status, and fetching events",
+  "version": "0.2.0",
+  "description": "An easy react hook to handle data fetching, fetching status, and fetching events",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "directories": {
